@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SHIFT Lab — UC Riverside</title>
-<meta name="description" content="SHIFT Lab at UC Riverside: principled trust in cooperative autonomy. Research on connected automated vehicles, V2X communication, and perception integrity monitoring.">
+<meta name="description" content="SHIFT Lab at UC Riverside: verifiable decision-making under uncertainty, spanning control, multi-agent coordination, and perception integrity, with connected and automated vehicles as the flagship testbed.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
@@ -48,9 +48,9 @@
   /* ---------- Nav ---------- */
   header.site-nav{
     position:sticky; top:0; z-index:50;
-    background:rgba(244,242,236,0.92);
+    background:rgba(20,24,28,0.94);
     backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--paper-line);
+    border-bottom:1px solid var(--ink-line);
   }
   .nav-inner{
     max-width:var(--max); margin:0 auto; padding:16px 28px;
@@ -58,17 +58,16 @@
   }
   .brand{
     font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:17px;
-    letter-spacing:0.01em; text-decoration:none; color:var(--ink);
+    letter-spacing:0.04em; text-decoration:none; color:var(--paper);
     display:flex; align-items:baseline; gap:8px;
   }
-  .brand .dot{color:var(--amber);}
   nav.links{display:flex; gap:28px;}
   nav.links a{
     font-family:'Space Grotesk',sans-serif; font-size:14px; text-decoration:none;
-    color:var(--muted); padding:4px 0; border-bottom:1px solid transparent;
+    color:var(--muted-on-ink); padding:4px 0; border-bottom:1px solid transparent;
   }
-  nav.links a:hover, nav.links a:focus-visible{color:var(--ink); border-bottom-color:var(--amber);}
-  .nav-toggle{display:none; background:none; border:1px solid var(--ink); border-radius:4px; padding:6px 10px; font-family:'Space Grotesk',sans-serif; cursor:pointer;}
+  nav.links a:hover, nav.links a:focus-visible{color:var(--paper); border-bottom-color:var(--amber);}
+  .nav-toggle{display:none; background:none; border:1px solid var(--paper); color:var(--paper); border-radius:4px; padding:6px 10px; font-family:'Space Grotesk',sans-serif; cursor:pointer;}
 
   /* ---------- Hero ---------- */
   .hero{
@@ -155,16 +154,28 @@
 
   /* ---------- Members ---------- */
   .member-row{
-    display:grid; grid-template-columns:1fr auto; gap:16px; align-items:baseline;
+    display:grid; grid-template-columns:56px 1fr auto; gap:20px; align-items:center;
     padding:22px 0; border-top:1px solid var(--paper-line);
   }
   .member-row:last-child{border-bottom:1px solid var(--paper-line);}
+  .member-photo{
+    width:56px; height:56px; border-radius:6px; object-fit:cover;
+    background:var(--paper-line);
+  }
   .member-name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:17px;}
   .member-focus{color:var(--muted); font-size:15px; margin-top:4px; max-width:56ch;}
+  .member-affil{color:var(--muted); font-size:14px; margin-top:4px; line-height:1.5;}
   .member-role{
     font-family:'Space Grotesk',sans-serif; font-size:12px; color:var(--pine);
     text-align:right; white-space:nowrap;
   }
+  .member-links{display:flex; gap:10px; margin-top:10px;}
+  .member-links a{
+    color:var(--muted); display:inline-flex; align-items:center; justify-content:center;
+    width:28px; height:28px; border:1px solid var(--paper-line); border-radius:5px;
+  }
+  .member-links a:hover, .member-links a:focus-visible{color:var(--pine); border-color:var(--pine);}
+  .member-links svg{width:15px; height:15px;}
   .members-cta{margin-top:28px; font-size:15px; color:var(--muted);}
   .members-cta a{color:var(--pine); text-decoration:underline; text-underline-offset:3px;}
 
@@ -228,12 +239,12 @@
     .pub-empty{grid-column:1;}
     .contact-grid{grid-column:1; grid-template-columns:1fr;}
     nav.links{
-      position:fixed; top:64px; left:0; right:0; background:var(--paper);
-      flex-direction:column; padding:16px 28px; gap:0; border-bottom:1px solid var(--paper-line);
+      position:fixed; top:64px; left:0; right:0; background:var(--ink);
+      flex-direction:column; padding:16px 28px; gap:0; border-bottom:1px solid var(--ink-line);
       transform:translateY(-140%); transition:transform 0.2s ease;
     }
     nav.links.open{transform:translateY(0);}
-    nav.links a{padding:12px 0; border-bottom:1px solid var(--paper-line);}
+    nav.links a{padding:12px 0; border-bottom:1px solid var(--ink-line);}
     .nav-toggle{display:block;}
   }
 </style>
@@ -244,7 +255,7 @@
 
 <header class="site-nav">
   <div class="nav-inner">
-    <a href="#top" class="brand">SHIFT<span class="dot">·</span>Lab</a>
+    <a href="#top" class="brand">SHIFT LAB</a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" id="navToggle">Menu</button>
     <nav class="links" id="primary-nav">
       <a href="#about">About</a>
@@ -273,12 +284,11 @@
       <path class="lane2 pulse" d="M -50 150 C 200 120, 600 190, 900 120 S 1150 60, 1300 90" style="animation-delay:-8s;"/>
     </svg>
     <div class="wrap">
-      <p class="hero-eyebrow">SHIFT Lab · Department of Mechanical Engineering · UC Riverside</p>
-      <h1>Principled trust in cooperative autonomy.</h1>
-      <p class="lede">We study how connected and automated vehicles can perceive, communicate, and act with quantifiable safety guarantees, from intersection-scale coordination to the integrity of a single perception estimate.</p>
+      <h1>Principled trust in autonomy.</h1>
+      <p class="lede">We develop principled methods to quantify the integrity of autonomous systems and translate uncertainty into safer decisions with quantifiable safety guarantees.</p>
       <div class="hero-meta">
-        <span>Director: <strong>Prof. Eunjeong Hyeon</strong></span>
-        <span>Based at <strong>CE-CERT</strong>, UC Riverside</span>
+        <span>PI: <strong>Eunjeong Hyeon</strong></span>
+        <span>University of California, Riverside</span>
       </div>
     </div>
   </section>
@@ -288,13 +298,9 @@
       <p class="section-tag">About</p>
       <div class="about-body">
         <h2 style="margin:0 0 24px;">Safe, Human-centric, Intelligent, Future Technology</h2>
-        <p>SHIFT Lab designs and validates cooperative driving automation (CDA) systems that hold up under uncertainty: unreliable sensors, contested right-of-way, and communication that arrives late or not at all. Our work sits at the intersection of multi-agent control, V2X communication, and statistical guarantees for perception.</p>
-        <p class="thesis">Autonomy earns trust not by acting confidently, but by knowing precisely when it should not.</p>
-        <p>That thesis grounds three lines of work: integrity monitoring for perception, agreement-seeking coordination among connected vehicles, and testbeds that let both be measured against real traffic, not just simulation.</p>
-        <ul class="affil-list">
-          <li>Department of Mechanical Engineering, UC Riverside</li>
-          <li>College of Engineering – Center for Environmental Research and Technology (CE-CERT)</li>
-        </ul>
+        <p>SHIFT Lab studies a fundamental problem in autonomous systems: how should a system make decisions when the information behind them is uncertain, incomplete, or unreliable? We develop principled methods to quantify uncertainty and integrity, determine when predictions can be trusted, and translate that information into safer decisions and control.</p>
+        <p class="thesis">A system earns trust not by acting confidently, but by knowing precisely when it should not.</p>
+        <p>Our research spans three connected layers of autonomous decision-making: risk-aware control under uncertain prediction, multi-agent coordination under information asymmetry, and integrity monitoring for AI systems. Across these settings, we develop methods that connect prediction and estimation to decision-making, control, and safety guarantees. The methods are built to travel across domains, and are validated wherever the sensing, communication, and safety constraints are well characterized enough to test them rigorously.</p>
       </div>
     </div>
   </section>
@@ -302,8 +308,8 @@
   <section id="research">
     <div class="wrap section-head">
       <p class="section-tag">Research</p>
-      <h2>Three problems we return to</h2>
-      <p class="section-intro">Each project below is a different angle on the same question: what can a cooperative autonomous system prove about its own decisions, and what should it do when it can't.</p>
+      <h2>One question, three registers</h2>
+      <p class="section-intro">Each line of work below asks a version of the same question at a different scale: what can a system prove about a decision made under uncertainty, and what should it do when it can't prove enough.</p>
     </div>
     <div class="wrap" style="display:grid; grid-template-columns:200px 1fr; gap:32px;">
       <div></div>
@@ -312,8 +318,8 @@
         <div class="research-item">
           <div class="research-marker"><span class="dot"></span></div>
           <div>
-            <h3>Perception Protection Level (PPL)</h3>
-            <p>A GNSS RAIM-inspired integrity monitoring framework for CAV perception, built on conformal prediction to bound per-estimate localization error against an explicit alert limit. Grounded in ISO 26262 and ISO 21448 (SOTIF), and validated on nuScenes for 3D object localization.</p>
+            <h3>Integrity Verification for Learned Perception</h3>
+            <p>A GNSS RAIM-inspired integrity monitoring framework, built on conformal prediction to bound the error of a single learned estimate against an explicit alert limit. Grounded in ISO 26262 and ISO 21448 (SOTIF), and validated on nuScenes for 3D object localization as one instantiation of a domain-agnostic safety argument for learning-based perception in any safety-critical CPS.</p>
             <span class="status">In development</span>
           </div>
         </div>
@@ -321,8 +327,8 @@
         <div class="research-item">
           <div class="research-marker"><span class="dot"></span></div>
           <div>
-            <h3>Agreement-Seeking Cooperative Driving</h3>
-            <p>AI-driven, agreement-based coordination for connected automated vehicles, spanning message-level protocol design (ASM/ISM/BSM), perception-accuracy evaluation, and on-track validation of full-stack decision-making under real vehicle-in-the-loop conditions.</p>
+            <h3>Multi-Agent Coordination Under Information Asymmetry</h3>
+            <p>Agreement-seeking coordination for agents that must reach consensus without shared full state, currently instantiated as agreement-based cooperative driving automation: message-level protocol design (ASM/ISM/BSM), perception-accuracy evaluation, and on-track validation of full-stack decision-making under real vehicle-in-the-loop conditions.</p>
             <span class="status">On-track validation underway</span>
           </div>
         </div>
@@ -330,8 +336,17 @@
         <div class="research-item">
           <div class="research-marker"><span class="dot"></span></div>
           <div>
+            <h3>Control and Prediction Under Uncertainty</h3>
+            <p>Optimal control strategies that stay safe and efficient when the forecasts they depend on, of a leading vehicle's trajectory, a system's future state, or another agent's intent, are necessarily imperfect. This is the lab's earliest line of work and the foundation the other two build on.</p>
+            <span class="status">Ongoing</span>
+          </div>
+        </div>
+
+        <div class="research-item">
+          <div class="research-marker"><span class="dot"></span></div>
+          <div>
             <h3>Intersection Safety &amp; Smart Testbeds</h3>
-            <p>Infrastructure and instrumentation for intersection-scale safety research, including a proposed "mini city" testbed at CE-CERT for repeatable, instrumented evaluation of cooperative driving systems beyond what simulation alone can validate.</p>
+            <p>Infrastructure and instrumentation for intersection-scale safety research, including a proposed "mini city" smart transportation testbed: a repeatable, instrumented environment for evaluating the three lines above against real conditions rather than simulation alone.</p>
             <span class="status">Proposal stage</span>
           </div>
         </div>
@@ -343,7 +358,6 @@
   <section id="members">
     <div class="wrap section-head">
       <p class="section-tag">Members</p>
-      <h2>People</h2>
       <p class="section-intro">A small, focused group working across control theory, statistics, and vehicle-scale experimentation.</p>
     </div>
     <div class="wrap" style="display:grid; grid-template-columns:200px 1fr; gap:32px;">
@@ -351,22 +365,36 @@
       <div>
 
         <div class="member-row">
+          <img class="member-photo" src="images/hyeon.jpg" alt="Eunjeong Hyeon">
           <div>
             <div class="member-name">Eunjeong Hyeon</div>
-            <div class="member-focus">Director. Assistant Professor, Mechanical Engineering. Cooperative driving automation, V2X communication, multi-agent control, and perception integrity monitoring.</div>
+            <div class="member-affil">Assistant Professor, Mechanical Engineering<br>Center for Environmental Research and Technology (CE-CERT)</div>
+            <div class="member-links">
+              <a href="https://www.linkedin.com/in/eunjeong-hyeon-883606105/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.36 4.26 5.44v6.3zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+              </a>
+              <a href="https://scholar.google.com/citations?hl=en&user=6jp9KNcAAAAJ" target="_blank" rel="noopener" aria-label="Google Scholar">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 1 9l4 2.5V18l7 4 7-4v-6.5L21 10v6h1V9L12 2zm0 2.4L18.8 9 12 13.4 5.2 9 12 4.4zM7 12.8l5 3.1 5-3.1v4.1l-5 2.9-5-2.9v-4.1z"/></svg>
+              </a>
+              <a href="https://profiles.ucr.edu/app/home/profile/eunjeonh" target="_blank" rel="noopener" aria-label="UCR Profile">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4.42 0-8 2.24-8 5v3h16v-3c0-2.76-3.58-5-8-5z"/></svg>
+              </a>
+            </div>
           </div>
-          <div class="member-role">Director</div>
+          <div class="member-role">PI</div>
         </div>
 
         <div class="member-row">
+          <img class="member-photo" src="images/saswat.jpg" alt="Saswat Nayak">
           <div>
             <div class="member-name">Saswat Nayak</div>
-            <div class="member-focus">Positioning integrity and RNP for connected automated vehicles.</div>
+            <div class="member-focus">Positioning integrity for connected and automated vehicles, including infrastructure-assisted state estimation and cooperative integrity monitoring over V2X.</div>
           </div>
           <div class="member-role">Postdoc</div>
         </div>
 
         <div class="member-row">
+          <img class="member-photo" src="images/mehak.jpg" alt="Mehak Saleem">
           <div>
             <div class="member-name">Mehak Saleem</div>
             <div class="member-focus">Human cognition estimation and perception AI integrity monitoring.</div>
@@ -377,7 +405,7 @@
       </div>
     </div>
     <div class="wrap">
-      <p class="members-cta" style="grid-column:2; margin-left:232px;">Interested in joining the lab? <a href="mailto:eunjeong.hyeon@ucr.edu">Get in touch</a>.</p>
+      <p class="members-cta" style="grid-column:2; margin-left:232px;">Interested in joining the lab? <a href="#contact">Get in touch</a>.</p>
     </div>
   </section>
 
@@ -466,7 +494,7 @@
         </div>
         <div class="contact-block">
           <h4>Location</h4>
-          <p>CE-CERT<br>1084 Columbia Ave<br>Riverside, CA, USA</p>
+          <p>1084 Columbia Ave<br>Riverside, CA, USA</p>
         </div>
       </div>
     </div>
