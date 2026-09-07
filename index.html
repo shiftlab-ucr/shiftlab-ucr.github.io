@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SHIFT Lab — UC Riverside</title>
+<meta name="description" content="SHIFT Lab at UC Riverside: principled trust in cooperative autonomy. Research on connected automated vehicles, V2X communication, and perception integrity monitoring.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14181C;
+    --ink-line:#2B3238;
+    --paper:#F4F2EC;
+    --paper-line:#D9D4C4;
+    --amber:#B8862A;
+    --pine:#34544A;
+    --muted:#6B6558;
+    --muted-on-ink:#9AA0A6;
+    --max:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.mono{
+    font-family:'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+  img,svg{max-width:100%; display:block;}
+
+  /* ---------- Skip link ---------- */
+  .skip-link{
+    position:absolute; left:-9999px; top:0; background:var(--ink); color:var(--paper);
+    padding:10px 16px; z-index:100; font-family:'Space Grotesk',sans-serif;
+  }
+  .skip-link:focus{left:12px; top:12px;}
+
+  /* ---------- Nav ---------- */
+  header.site-nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(244,242,236,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--paper-line);
+  }
+  .nav-inner{
+    max-width:var(--max); margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:17px;
+    letter-spacing:0.01em; text-decoration:none; color:var(--ink);
+    display:flex; align-items:baseline; gap:8px;
+  }
+  .brand .dot{color:var(--amber);}
+  nav.links{display:flex; gap:28px;}
+  nav.links a{
+    font-family:'Space Grotesk',sans-serif; font-size:14px; text-decoration:none;
+    color:var(--muted); padding:4px 0; border-bottom:1px solid transparent;
+  }
+  nav.links a:hover, nav.links a:focus-visible{color:var(--ink); border-bottom-color:var(--amber);}
+  .nav-toggle{display:none; background:none; border:1px solid var(--ink); border-radius:4px; padding:6px 10px; font-family:'Space Grotesk',sans-serif; cursor:pointer;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:var(--ink); color:var(--paper);
+    padding:96px 0 72px;
+    position:relative; overflow:hidden;
+  }
+  .hero .wrap{position:relative; z-index:2;}
+  .hero-lines{position:absolute; inset:0; z-index:1; opacity:0.5;}
+  .hero-eyebrow{
+    font-family:'Space Grotesk',sans-serif; font-size:13px; letter-spacing:0.04em;
+    color:var(--amber); margin:0 0 18px;
+  }
+  .hero h1{
+    font-size:clamp(34px,5vw,56px); line-height:1.08; font-weight:600;
+    margin:0 0 24px; max-width:14ch; letter-spacing:-0.01em;
+  }
+  .hero p.lede{
+    font-family:'Source Serif 4',serif; font-size:19px; line-height:1.6;
+    max-width:56ch; color:#D8D6CF; margin:0 0 32px;
+  }
+  .hero-meta{display:flex; flex-wrap:wrap; gap:10px 28px; font-family:'Space Grotesk',sans-serif; font-size:13px; color:var(--muted-on-ink);}
+  .hero-meta span strong{color:var(--paper); font-weight:500;}
+
+  /* ---------- Section shell ---------- */
+  section{padding:80px 0;}
+  section + section{border-top:1px solid var(--paper-line);}
+  .section-head{
+    display:grid; grid-template-columns:200px 1fr; gap:32px; margin-bottom:48px;
+    align-items:start;
+  }
+  .section-tag{
+    font-family:'Space Grotesk',sans-serif; font-size:13px; color:var(--amber);
+    text-transform:none; letter-spacing:0.02em; padding-top:6px;
+  }
+  .section-head h2{
+    font-size:clamp(24px,3vw,32px); font-weight:600; margin:0; line-height:1.2;
+    max-width:20ch;
+  }
+  .section-intro{
+    grid-column:2; font-size:17px; color:var(--muted); max-width:62ch; margin-top:-28px;
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid; grid-template-columns:200px 1fr; gap:32px;}
+  .about-body{grid-column:2; max-width:68ch;}
+  .about-body p{margin:0 0 20px;}
+  .thesis{
+    font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:500;
+    color:var(--pine); border-left:3px solid var(--pine); padding-left:20px;
+    margin:32px 0; max-width:52ch;
+  }
+  .affil-list{list-style:none; margin:28px 0 0; padding:0; display:flex; flex-direction:column; gap:8px;}
+  .affil-list li{
+    font-family:'Space Grotesk',sans-serif; font-size:14px; color:var(--muted);
+    padding-left:18px; position:relative;
+  }
+  .affil-list li::before{
+    content:""; position:absolute; left:0; top:9px; width:8px; height:1px; background:var(--amber);
+  }
+
+  /* ---------- Research ---------- */
+  .research-corridor{
+    grid-column:2; display:flex; flex-direction:column; gap:0;
+  }
+  .research-item{
+    display:grid; grid-template-columns:auto 1fr; gap:28px;
+    padding:32px 0; border-top:1px dashed var(--paper-line);
+  }
+  .research-item:first-child{border-top:1px dashed var(--paper-line);}
+  .research-marker{
+    width:10px; padding-top:6px;
+  }
+  .research-marker .dot{width:10px; height:10px; border-radius:50%; background:var(--pine); display:block;}
+  .research-item h3{
+    font-size:20px; font-weight:600; margin:0 0 10px;
+  }
+  .research-item p{margin:0 0 12px; max-width:60ch; color:var(--ink);}
+  .research-item .status{
+    font-family:'Space Grotesk',sans-serif; font-size:12px; color:var(--muted);
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .research-item .status::before{content:"—"; color:var(--paper-line);}
+
+  /* ---------- Members ---------- */
+  .member-row{
+    display:grid; grid-template-columns:1fr auto; gap:16px; align-items:baseline;
+    padding:22px 0; border-top:1px solid var(--paper-line);
+  }
+  .member-row:last-child{border-bottom:1px solid var(--paper-line);}
+  .member-name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:17px;}
+  .member-focus{color:var(--muted); font-size:15px; margin-top:4px; max-width:56ch;}
+  .member-role{
+    font-family:'Space Grotesk',sans-serif; font-size:12px; color:var(--pine);
+    text-align:right; white-space:nowrap;
+  }
+  .members-cta{margin-top:28px; font-size:15px; color:var(--muted);}
+  .members-cta a{color:var(--pine); text-decoration:underline; text-underline-offset:3px;}
+
+  /* ---------- Publications ---------- */
+  .pub-empty{
+    grid-column:2; border:1px dashed var(--paper-line); padding:32px;
+    font-family:'Space Grotesk',sans-serif; font-size:14px; color:var(--muted);
+    max-width:62ch;
+  }
+  .pub-empty strong{color:var(--ink); font-family:'Source Serif 4',serif; font-weight:600; display:block; margin-bottom:8px; font-size:16px;}
+  .pub-list{grid-column:2; list-style:none; margin:0; padding:0; max-width:74ch;}
+  .pub-item{
+    padding:20px 0; border-top:1px dashed var(--paper-line);
+    display:grid; grid-template-columns:64px 1fr; gap:20px;
+  }
+  .pub-list .pub-item:last-child{border-bottom:1px dashed var(--paper-line);}
+  .pub-year{
+    font-family:'Space Grotesk',sans-serif; font-size:13px; color:var(--amber); padding-top:3px;
+  }
+  .pub-title{margin:0 0 6px; font-size:16px; line-height:1.45;}
+  .pub-title a{text-decoration:none; border-bottom:1px solid var(--paper-line);}
+  .pub-title a:hover{border-bottom-color:var(--ink);}
+  .pub-venue{
+    font-family:'Space Grotesk',sans-serif; font-size:13px; color:var(--muted); margin:0;
+  }
+  .pub-more{grid-column:2; margin-top:24px; font-size:15px; color:var(--muted); max-width:62ch;}
+  .pub-more a{color:var(--pine); text-decoration:underline; text-underline-offset:3px;}
+
+  /* ---------- Contact ---------- */
+  .contact-grid{grid-column:2; display:grid; grid-template-columns:1fr 1fr; gap:48px; max-width:72ch;}
+  .contact-block h4{
+    font-family:'Space Grotesk',sans-serif; font-size:13px; color:var(--amber);
+    margin:0 0 10px; font-weight:500;
+  }
+  .contact-block p{margin:0; color:var(--ink); font-size:16px;}
+  .contact-block a{text-decoration:underline; text-underline-offset:3px; color:var(--ink);}
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--ink); color:var(--muted-on-ink); padding:40px 0;
+    font-family:'Space Grotesk',sans-serif; font-size:13px;
+  }
+  footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;}
+
+  /* ---------- Focus visibility ---------- */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--pine); outline-offset:2px;}
+
+  /* ---------- Reduced motion ---------- */
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .hero-lines path{animation:none !important;}
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:820px){
+    .section-head{grid-template-columns:1fr; gap:8px;}
+    .section-intro{grid-column:1; margin-top:0;}
+    .about-grid{grid-template-columns:1fr;}
+    .about-body{grid-column:1;}
+    .research-corridor{grid-column:1;}
+    .pub-empty{grid-column:1;}
+    .contact-grid{grid-column:1; grid-template-columns:1fr;}
+    nav.links{
+      position:fixed; top:64px; left:0; right:0; background:var(--paper);
+      flex-direction:column; padding:16px 28px; gap:0; border-bottom:1px solid var(--paper-line);
+      transform:translateY(-140%); transition:transform 0.2s ease;
+    }
+    nav.links.open{transform:translateY(0);}
+    nav.links a{padding:12px 0; border-bottom:1px solid var(--paper-line);}
+    .nav-toggle{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">SHIFT<span class="dot">·</span>Lab</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" id="navToggle">Menu</button>
+    <nav class="links" id="primary-nav">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#members">Members</a>
+      <a href="#publications">Publications</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" id="top">
+    <svg class="hero-lines" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <style>
+          .lane{stroke:#3E6259; stroke-width:1.4; fill:none; stroke-dasharray:10 12; opacity:0.55;}
+          .lane2{stroke:#B8862A; stroke-width:1; fill:none; stroke-dasharray:2 8; opacity:0.4;}
+          .pulse{animation:dash 14s linear infinite;}
+          @keyframes dash{to{stroke-dashoffset:-400;}}
+        </style>
+      </defs>
+      <path class="lane pulse" d="M -50 420 C 250 380, 450 460, 700 380 S 1150 300, 1300 340"/>
+      <path class="lane pulse" d="M -50 300 C 300 260, 500 340, 800 260 S 1150 180, 1300 220" style="animation-delay:-4s;"/>
+      <path class="lane2 pulse" d="M -50 150 C 200 120, 600 190, 900 120 S 1150 60, 1300 90" style="animation-delay:-8s;"/>
+    </svg>
+    <div class="wrap">
+      <p class="hero-eyebrow">SHIFT Lab · Department of Mechanical Engineering · UC Riverside</p>
+      <h1>Principled trust in cooperative autonomy.</h1>
+      <p class="lede">We study how connected and automated vehicles can perceive, communicate, and act with quantifiable safety guarantees, from intersection-scale coordination to the integrity of a single perception estimate.</p>
+      <div class="hero-meta">
+        <span>Director: <strong>Prof. Eunjeong Hyeon</strong></span>
+        <span>Based at <strong>CE-CERT</strong>, UC Riverside</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about-grid">
+      <p class="section-tag">About</p>
+      <div class="about-body">
+        <h2 style="margin:0 0 24px;">Safe, Human-centric, Intelligent, Future Technology</h2>
+        <p>SHIFT Lab designs and validates cooperative driving automation (CDA) systems that hold up under uncertainty: unreliable sensors, contested right-of-way, and communication that arrives late or not at all. Our work sits at the intersection of multi-agent control, V2X communication, and statistical guarantees for perception.</p>
+        <p class="thesis">Autonomy earns trust not by acting confidently, but by knowing precisely when it should not.</p>
+        <p>That thesis grounds three lines of work: integrity monitoring for perception, agreement-seeking coordination among connected vehicles, and testbeds that let both be measured against real traffic, not just simulation.</p>
+        <ul class="affil-list">
+          <li>Department of Mechanical Engineering, UC Riverside</li>
+          <li>College of Engineering – Center for Environmental Research and Technology (CE-CERT)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="wrap section-head">
+      <p class="section-tag">Research</p>
+      <h2>Three problems we return to</h2>
+      <p class="section-intro">Each project below is a different angle on the same question: what can a cooperative autonomous system prove about its own decisions, and what should it do when it can't.</p>
+    </div>
+    <div class="wrap" style="display:grid; grid-template-columns:200px 1fr; gap:32px;">
+      <div></div>
+      <div class="research-corridor">
+
+        <div class="research-item">
+          <div class="research-marker"><span class="dot"></span></div>
+          <div>
+            <h3>Perception Protection Level (PPL)</h3>
+            <p>A GNSS RAIM-inspired integrity monitoring framework for CAV perception, built on conformal prediction to bound per-estimate localization error against an explicit alert limit. Grounded in ISO 26262 and ISO 21448 (SOTIF), and validated on nuScenes for 3D object localization.</p>
+            <span class="status">In development</span>
+          </div>
+        </div>
+
+        <div class="research-item">
+          <div class="research-marker"><span class="dot"></span></div>
+          <div>
+            <h3>Agreement-Seeking Cooperative Driving</h3>
+            <p>AI-driven, agreement-based coordination for connected automated vehicles, spanning message-level protocol design (ASM/ISM/BSM), perception-accuracy evaluation, and on-track validation of full-stack decision-making under real vehicle-in-the-loop conditions.</p>
+            <span class="status">On-track validation underway</span>
+          </div>
+        </div>
+
+        <div class="research-item">
+          <div class="research-marker"><span class="dot"></span></div>
+          <div>
+            <h3>Intersection Safety &amp; Smart Testbeds</h3>
+            <p>Infrastructure and instrumentation for intersection-scale safety research, including a proposed "mini city" testbed at CE-CERT for repeatable, instrumented evaluation of cooperative driving systems beyond what simulation alone can validate.</p>
+            <span class="status">Proposal stage</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="members">
+    <div class="wrap section-head">
+      <p class="section-tag">Members</p>
+      <h2>People</h2>
+      <p class="section-intro">A small, focused group working across control theory, statistics, and vehicle-scale experimentation.</p>
+    </div>
+    <div class="wrap" style="display:grid; grid-template-columns:200px 1fr; gap:32px;">
+      <div></div>
+      <div>
+
+        <div class="member-row">
+          <div>
+            <div class="member-name">Eunjeong Hyeon</div>
+            <div class="member-focus">Director. Assistant Professor, Mechanical Engineering. Cooperative driving automation, V2X communication, multi-agent control, and perception integrity monitoring.</div>
+          </div>
+          <div class="member-role">Director</div>
+        </div>
+
+        <div class="member-row">
+          <div>
+            <div class="member-name">Saswat Nayak</div>
+            <div class="member-focus">Positioning integrity and RNP for connected automated vehicles.</div>
+          </div>
+          <div class="member-role">Postdoc</div>
+        </div>
+
+        <div class="member-row">
+          <div>
+            <div class="member-name">Mehak Saleem</div>
+            <div class="member-focus">Human cognition estimation and perception AI integrity monitoring.</div>
+          </div>
+          <div class="member-role">PhD Student</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="wrap">
+      <p class="members-cta" style="grid-column:2; margin-left:232px;">Interested in joining the lab? <a href="mailto:eunjeong.hyeon@ucr.edu">Get in touch</a>.</p>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="wrap section-head">
+      <p class="section-tag">Publications</p>
+      <h2>Selected work</h2>
+      <p class="section-intro">A subset of recent publications from the lab and its director. Full record on Google Scholar.</p>
+    </div>
+    <div class="wrap" style="display:grid; grid-template-columns:200px 1fr; gap:32px;">
+      <div></div>
+      <ul class="pub-list">
+
+        <li class="pub-item">
+          <span class="pub-year">2026</span>
+          <div>
+            <p class="pub-title"><a href="https://www.researchgate.net/publication/403565144_A_Simple_Analytical_Model_for_Predicting_Cooperative_Ratio_in_Agreement-Seeking_Cooperative_Driving_Automation_with_C-V2X_Communication" target="_blank" rel="noopener">A Simple Analytical Model for Predicting Cooperative Ratio in Agreement-Seeking Cooperative Driving Automation with C-V2X Communication</a></p>
+            <p class="pub-venue">L. Zhan, M. Di Russo, D. Das, et al., E. Hyeon — Conference paper</p>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <span class="pub-year">2026</span>
+          <div>
+            <p class="pub-title"><a href="https://www.researchgate.net/publication/403323981_On-Track_Validation_of_Full-Stack_Agreement-Seeking_Cooperative_Driving_Automation_and_Energy_Saving_Evaluation" target="_blank" rel="noopener">On-Track Validation of Full-Stack Agreement-Seeking Cooperative Driving Automation and Energy Saving Evaluation</a></p>
+            <p class="pub-venue">E. Hyeon, L. Zhan, P. Misra, et al., K. Stutenberg — Preprint</p>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <span class="pub-year">2024</span>
+          <div>
+            <p class="pub-title"><a href="https://www.researchgate.net/publication/384480568_Validation_of_Energy_Saving_from_Cooperative_Driving_Automation_Via_Vehicle-In-The-Loop_Tests" target="_blank" rel="noopener">Validation of Energy Saving from Cooperative Driving Automation Via Vehicle-In-The-Loop Tests</a></p>
+            <p class="pub-venue">E. Hyeon, M. Di Russo, L. Zhan, D. Karbowski — ASME Letters in Dynamic Systems and Control</p>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <span class="pub-year">2024</span>
+          <div>
+            <p class="pub-title"><a href="https://www.researchgate.net/publication/380779423_A_Large-Scale_Analysis_to_Optimize_the_Control_and_V2V_Communication_Protocols_for_CDA_Agreement-Seeking_Cooperation" target="_blank" rel="noopener">A Large-Scale Analysis to Optimize the Control and V2V Communication Protocols for CDA Agreement-Seeking Cooperation</a></p>
+            <p class="pub-venue">E. Hyeon, P. Misra, D. Karbowski — IEEE Transactions on Control Systems Technology</p>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <span class="pub-year">2023</span>
+          <div>
+            <p class="pub-title"><a href="https://www.researchgate.net/publication/372695583_Decision-Making_Strategy_Using_Multi-Agent_Reinforcement_Learning_for_Platoon_Formation_in_Agreement-Seeking_Cooperation" target="_blank" rel="noopener">Decision-Making Strategy Using Multi-Agent Reinforcement Learning for Platoon Formation in Agreement-Seeking Cooperation</a></p>
+            <p class="pub-venue">E. Hyeon, D. Karbowski, A. Rousseau — Conference paper</p>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <span class="pub-year">2022</span>
+          <div>
+            <p class="pub-title"><a href="https://www.researchgate.net/publication/365148192_Loss_Function_Design_for_Data-Driven_Predictors_to_Enhance_the_Energy_Efficiency_of_Connected_and_Automated_Vehicles" target="_blank" rel="noopener">Loss Function Design for Data-Driven Predictors to Enhance the Energy Efficiency of Connected and Automated Vehicles</a></p>
+            <p class="pub-venue">E. Hyeon, T. Ersal, Y. Kim, A. G. Stefanopoulou — IEEE Transactions on Intelligent Transportation Systems</p>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <span class="pub-year">2021</span>
+          <div>
+            <p class="pub-title"><a href="https://www.researchgate.net/publication/354252735_Data-Driven_Forgetting_and_Discount_Factors_for_Vehicle_Speed_Forecasting_in_Ecological_Adaptive_Cruise_Control" target="_blank" rel="noopener">Data-Driven Forgetting and Discount Factors for Vehicle Speed Forecasting in Ecological Adaptive Cruise Control</a></p>
+            <p class="pub-venue">E. Hyeon, Y. Kim, T. Ersal, A. Stefanopoulou — Journal of Dynamic Systems, Measurement, and Control</p>
+          </div>
+        </li>
+
+      </ul>
+      <p class="pub-more">Full list, including earlier work and citation metrics, on <a href="https://scholar.google.com/citations?hl=en&user=6jp9KNcAAAAJ" target="_blank" rel="noopener">Google Scholar</a> and <a href="https://www.researchgate.net/profile/Eunjeong-Hyeon" target="_blank" rel="noopener">ResearchGate</a>.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap section-head">
+      <p class="section-tag">Contact</p>
+      <h2>Get in touch</h2>
+    </div>
+    <div class="wrap" style="display:grid; grid-template-columns:200px 1fr; gap:32px;">
+      <div></div>
+      <div class="contact-grid">
+        <div class="contact-block">
+          <h4>Email</h4>
+          <p><a href="mailto:eunjeong.hyeon@ucr.edu">eunjeong.hyeon@ucr.edu</a></p>
+        </div>
+        <div class="contact-block">
+          <h4>Location</h4>
+          <p>CE-CERT<br>1084 Columbia Ave<br>Riverside, CA, USA</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> SHIFT Lab, UC Riverside</span>
+    <span>Department of Mechanical Engineering</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('primary-nav');
+  toggle.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+    });
+  });
+</script>
+
+</body>
+</html>
