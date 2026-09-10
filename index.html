@@ -18,7 +18,7 @@
     --pine:#34544A;
     --muted:#6B6558;
     --muted-on-ink:#9AA0A6;
-    --max:1120px;
+    --max:clamp(1120px, 88vw, 1680px);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -105,15 +105,14 @@
   }
   .section-head h2{
     font-size:clamp(24px,3vw,32px); font-weight:600; margin:0; line-height:1.2;
-    max-width:20ch;
   }
   .section-intro{
-    grid-column:2; font-size:17px; color:var(--muted); max-width:62ch; margin-top:-28px;
+    grid-column:2; font-size:17px; color:var(--muted); max-width:100%; margin-top:-28px;
   }
 
   /* ---------- About ---------- */
   .about-grid{display:grid; grid-template-columns:200px 1fr; gap:32px;}
-  .about-body{grid-column:2; max-width:68ch;}
+  .about-body{grid-column:2; max-width:100%;}
   .about-body p{margin:0 0 20px;}
   .thesis{
     font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:500;
@@ -134,7 +133,7 @@
     grid-column:2; display:grid; grid-template-columns:repeat(3, 1fr); gap:36px 28px;
   }
   .research-item{
-    display:flex; flex-direction:column;
+    display:flex; flex-direction:column; max-width:300px; justify-self:start;
     padding-top:24px; border-top:1px dashed var(--paper-line);
   }
   .research-marker{display:none;}
@@ -158,7 +157,7 @@
   .members-grid{
     display:grid; grid-template-columns:repeat(3, 1fr); gap:40px 32px;
   }
-  .member-card{display:flex; flex-direction:column;}
+  .member-card{display:flex; flex-direction:column; max-width:260px; justify-self:start;}
   .member-photo{
     width:100%; aspect-ratio:1/1; border-radius:8px;
     background-color:var(--paper-line);
@@ -207,6 +206,23 @@
   .pub-venue{
     font-family:'Space Grotesk',sans-serif; font-size:13px; color:var(--muted); margin:0;
   }
+  .pub-grid{grid-column:2; list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 250px)); justify-content:start; gap:36px 28px;}
+  .pub-card{display:flex; flex-direction:column; gap:10px; min-width:0;}
+  .pub-card a.pub-fig{display:block; text-decoration:none;}
+  .pub-fig-box{
+    aspect-ratio:16/9; border:1px solid var(--paper-line); border-radius:8px; background:#FBFAF6;
+    overflow:hidden; padding:0;
+  }
+  .pub-fig-box img{width:100%; height:100%; object-fit:cover; object-position:center; display:block;}
+  .pub-fig-box.pending{border-style:dashed; padding:18px;}
+  .pub-fig-box.pending span{font-family:'Space Grotesk',sans-serif; font-size:12px; color:var(--muted); text-align:center; line-height:1.5;}
+  .pub-card a.pub-fig:hover .pub-fig-box, .pub-card a.pub-fig:focus-visible .pub-fig-box{border-color:var(--pine);}
+  .pub-card .pub-title{margin:4px 0 0; font-size:16px; line-height:1.4; font-weight:600;}
+  .pub-card .pub-title a{text-decoration:none; border-bottom:1px solid var(--paper-line);}
+  .pub-card .pub-title a:hover{border-bottom-color:var(--ink);}
+  .pub-card .pub-blurb{margin:0; font-size:14px; line-height:1.55; color:var(--ink);}
+  .pub-card .pub-venue{margin:0;}
+  .pub-card .pub-venue .pub-year{padding:0; margin-right:8px;}
   .pub-more{grid-column:2; margin-top:24px; font-size:15px; color:var(--muted); max-width:62ch;}
   .pub-more a{color:var(--pine); text-decoration:underline; text-underline-offset:3px;}
 
@@ -240,8 +256,9 @@
 
   /* ---------- Responsive ---------- */
   @media (max-width:1000px) and (min-width:821px){
+    .pub-grid{grid-template-columns:repeat(2, 1fr);}
     .research-corridor{grid-template-columns:1fr; gap:32px;}
-    .research-item{display:grid; grid-template-columns:200px 1fr; gap:24px; align-items:start;}
+    .research-item{display:grid; grid-template-columns:200px 1fr; gap:24px; align-items:start; max-width:none;}
     .research-item h3{margin-top:0;}
   }
   @media (max-width:820px){
@@ -254,11 +271,14 @@
     .content-row{grid-template-columns:1fr; gap:0;}
     .content-row > .content-spacer{display:none;}
     .research-corridor{grid-column:1; grid-template-columns:1fr; gap:32px;}
+    .research-item{max-width:none;}
     .research-figure{max-width:280px;}
     .pub-empty{grid-column:1;}
     .pub-list{grid-column:1; max-width:100%;}
+    .pub-grid{grid-column:1; grid-template-columns:repeat(2, 1fr);}
     .pub-more{grid-column:1;}
     .members-grid{grid-column:1; grid-template-columns:repeat(2, 1fr);}
+    .member-card{max-width:none;}
     .contact-grid{grid-column:1; grid-template-columns:1fr;}
     .members-cta{margin-left:0 !important;}
     nav.links{
@@ -271,6 +291,7 @@
     .nav-toggle{display:block;}
   }
   @media (max-width:600px){
+    .pub-grid{grid-template-columns:1fr; gap:32px;}
     body{font-size:16px;}
     .wrap{padding:0 20px;}
     .thesis{padding-left:16px; font-size:18px;}
@@ -340,7 +361,7 @@
     <div class="wrap section-head">
       <p class="section-tag">Research</p>
       <h2 style="margin:0 0 24px;">One question, three registers</h2>
-      <p class="section-intro">Our research spans three connected layers of autonomous decision-making: risk-aware control under uncertain prediction, multi-agent coordination under information asymmetry, and integrity monitoring for AI systems. Across these settings, we develop methods that connect prediction and estimation to decision-making, control, and safety guarantees. The methods are built to travel across domains, and are validated wherever the sensing, communication, and safety constraints are well characterized enough to test them rigorously.</p>
+      <p class="section-intro">Our research spans three registers of one question: what an autonomous system can trust in its own sensing and learned models (runtime integrity monitoring), how it should act on forecasts it cannot fully trust (decision-aware prediction and risk-aware control), and how it should reach agreements with other agents it cannot fully observe (negotiated multi-agent coordination). Methods are validated from simulation through hardware-in-the-loop to on-track tests on production vehicles, and have been applied to UAV navigation and connected and automated vehicles.</p>
     </div>
     <div class="wrap content-row">
       <div class="content-spacer"></div>
@@ -349,8 +370,8 @@
         <div class="research-item">
           <div class="research-marker"><span class="dot"></span></div>
           <div>
-            <h3>Integrity Verification for AI Systems</h3>
-            <p>A principled integrity monitoring framework for learning-based systems, inspired by GNSS RAIM and grounded in conformal prediction. We develop methods to bound the error of AI-generated estimates or predictions against explicit alert limits, providing a quantitative basis for determining when an AI output can be trusted. The framework is designed to extend across AI models and safety-critical applications.</p>
+            <h3>Runtime Integrity Monitoring for AI Systems</h3>
+            <p>Learned perception and prediction models report confidence, not integrity. We build protection levels for AI outputs by extending the fault-hypothesis structure of GNSS receiver autonomous integrity monitoring to learned models, with conformal prediction calibrating the nominal case. The result is a runtime test that tells a controller when an AI output may be used and when it must not.</p>
           </div>
           <div class="research-figure" aria-hidden="true">
             <svg viewBox="0 0 176 176" xmlns="http://www.w3.org/2000/svg">
@@ -370,8 +391,36 @@
         <div class="research-item">
           <div class="research-marker"><span class="dot"></span></div>
           <div>
-            <h3>Multi-Agent Coordination Under Information Asymmetry</h3>
-            <p>Agreement-seeking coordination for autonomous agents that must make collective decisions without access to shared or complete information. We study how agents can communicate, reason about uncertainty and information quality, and reach safe and effective decisions when each agent has only a partial view of the system. Cooperative driving provides one testbed for these methods, with broader applications to distributed autonomous systems.</p>
+            <h3>Decision-Aware Prediction and Risk-Aware Control</h3>
+            <p>A forecast exists to serve a decision. We design predictors and controllers as a pair: the predictor is trained on the closed-loop cost of its errors rather than on average accuracy, and the controller hedges explicitly against the uncertainty the predictor reports. This thrust links the other two: integrity bounds become the uncertainty a controller consumes, and predictions of other agents feed coordination.</p>
+          </div>
+          <div class="research-figure" aria-hidden="true">
+            <svg viewBox="0 0 176 176" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ax" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#6B6558" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+              </defs>
+              <line x1="26" y1="138" x2="164" y2="138" stroke="#6B6558" stroke-width="0.8" marker-end="url(#ax)"/>
+              <line x1="26" y1="138" x2="26" y2="24" stroke="#6B6558" stroke-width="0.8" marker-end="url(#ax)"/>
+              <text transform="translate(14,84) rotate(-90)" text-anchor="middle">Predicted state</text>
+              <path d="M26 98 L156 40 L156 122 Z" fill="#34544A" fill-opacity="0.14"/>
+              <path d="M26 98 L156 81" fill="none" stroke="#34544A" stroke-width="1.3" stroke-dasharray="4 3"/>
+              <path d="M26 98 L156 104" fill="none" stroke="#34544A" stroke-width="2"/>
+              <circle cx="26" cy="98" r="3.5" fill="#34544A"/>
+              <line x1="34" y1="40" x2="48" y2="40" stroke="#34544A" stroke-width="1.3" stroke-dasharray="4 3"/>
+              <text x="52" y="43.5">Forecast</text>
+              <line x1="34" y1="54" x2="48" y2="54" stroke="#34544A" stroke-width="2"/>
+              <text x="52" y="57.5">Plan</text>
+              <text x="95" y="154" text-anchor="middle">Forecast horizon</text>
+              <text x="88" y="176" text-anchor="middle">Forecast and plan designed as a pair</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="research-item">
+          <div class="research-marker"><span class="dot"></span></div>
+          <div>
+            <h3>Negotiated Coordination Under Partial Information</h3>
+            <p>Agents with different objectives and partial views must decide whether to cooperate, on what plan, over a channel that drops and delays messages. We study agreement-seeking cooperation: decision policies, message sets and timing, and models of how often agreement forms, validated from simulation to experiment.</p>
           </div>
           <div class="research-figure" aria-hidden="true">
             <svg viewBox="0 0 176 176" xmlns="http://www.w3.org/2000/svg">
@@ -396,34 +445,6 @@
               <line x1="43" y1="118" x2="133" y2="118" stroke="#6B6558" stroke-width="0.6" stroke-dasharray="2 4"/>
               <text x="88" y="158" text-anchor="middle">Partial views converging</text>
               <text x="88" y="171" text-anchor="middle">to consensus</text>
-            </svg>
-          </div>
-        </div>
-
-        <div class="research-item">
-          <div class="research-marker"><span class="dot"></span></div>
-          <div>
-            <h3>Risk-Aware Control</h3>
-            <p>Optimal decision-making and control when the information used to predict future states or other agents' behavior is inherently uncertain. We develop risk-aware methods that explicitly account for prediction uncertainty in planning and control, enabling systems to balance performance and safety when their forecasts may be imperfect. This work provides a foundation for connecting uncertainty quantification to downstream decision-making and control.</p>
-          </div>
-          <div class="research-figure" aria-hidden="true">
-            <svg viewBox="0 0 176 176" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <marker id="ax" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#6B6558" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
-              </defs>
-              <line x1="26" y1="138" x2="164" y2="138" stroke="#6B6558" stroke-width="0.8" marker-end="url(#ax)"/>
-              <line x1="26" y1="138" x2="26" y2="24" stroke="#6B6558" stroke-width="0.8" marker-end="url(#ax)"/>
-              <text transform="translate(14,84) rotate(-90)" text-anchor="middle">Predicted state</text>
-              <path d="M26 98 L156 40 L156 122 Z" fill="#34544A" fill-opacity="0.14"/>
-              <path d="M26 98 L156 81" fill="none" stroke="#34544A" stroke-width="1.3" stroke-dasharray="4 3"/>
-              <path d="M26 98 L156 104" fill="none" stroke="#34544A" stroke-width="2"/>
-              <circle cx="26" cy="98" r="3.5" fill="#34544A"/>
-              <line x1="34" y1="40" x2="48" y2="40" stroke="#34544A" stroke-width="1.3" stroke-dasharray="4 3"/>
-              <text x="52" y="43.5">Forecast</text>
-              <line x1="34" y1="54" x2="48" y2="54" stroke="#34544A" stroke-width="2"/>
-              <text x="52" y="57.5">Plan</text>
-              <text x="95" y="154" text-anchor="middle">Forecast horizon</text>
-              <text x="88" y="176" text-anchor="middle">Plan hedges against forecast error</text>
             </svg>
           </div>
         </div>
@@ -462,14 +483,14 @@
           <div class="member-photo" role="img" aria-label="Saswat Nayak" style="background-image:url('images/saswat.jpg')"></div>
           <div class="member-name">Saswat Nayak</div>
           <div class="member-role">Postdoc</div>
-          <div class="member-focus">Positioning integrity for connected and automated vehicles, including infrastructure-assisted state estimation and cooperative integrity monitoring over V2X.</div>
+          <div class="member-focus">Positioning and cooperative integrity monitoring over V2X; simulation infrastructure for testing multi-modal integrity monitors.</div>
         </div>
 
         <div class="member-card">
           <div class="member-photo" role="img" aria-label="Mehak Saleem" style="background-image:url('images/mehak.jpg')"></div>
           <div class="member-name">Mehak Saleem</div>
           <div class="member-role">PhD Student</div>
-          <div class="member-focus">Human cognition estimation and perception AI integrity monitoring.</div>
+          <div class="member-focus">Perception integrity monitoring with conformal prediction; driver-state estimation under occlusion.</div>
         </div>
 
       </div>
@@ -483,82 +504,73 @@
     <div class="wrap section-head">
       <p class="section-tag">Publications</p>
       <h2>Selected work</h2>
-      <p class="section-intro">A subset of recent publications from the lab and its director. Full record on <a href="https://scholar.google.com/citations?hl=en&user=6jp9KNcAAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
+      <p class="section-intro">Full record on <a href="https://scholar.google.com/citations?hl=en&user=6jp9KNcAAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
     </div>
     <div class="wrap content-row">
       <div class="content-spacer"></div>
-      <ul class="pub-list">
+      <ul class="pub-grid">
 
-        <li class="pub-item">
-          <span class="pub-year">2026</span>
-          <div>
-            <p class="pub-title"><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=6jp9KNcAAAAJ&sortby=pubdate&citation_for_view=6jp9KNcAAAAJ:5nxA0vEk-isC" target="_blank" rel="noopener">Eyes on Context: Intelligent Driver Monitoring System with Driving Scene Awareness</a></p>
-            <p class="pub-venue">M. Saleem, S. Li, M. Miralles, E. Hyeon, G. Wu, H. Qiu, M. J. Barth — IEEE Transportation Electrification Conference &amp; Expo (ITEC) &amp; Electric Ground Vehicle Systems</p>
-          </div>
+        <li class="pub-card">
+          <a class="pub-fig" href="https://www.researchgate.net/publication/403323981_On-Track_Validation_of_Full-Stack_Agreement-Seeking_Cooperative_Driving_Automation_and_Energy_Saving_Evaluation" target="_blank" rel="noopener"><div class="pub-fig-box"><img src="assets/figures/ontrack-2026.png" alt="Two instrumented test vehicles, a Hyundai Ioniq 5 and a Toyota Prius Prime, at the Argonne test site" loading="lazy"></div></a>
+          <p class="pub-title"><a href="https://www.researchgate.net/publication/403323981_On-Track_Validation_of_Full-Stack_Agreement-Seeking_Cooperative_Driving_Automation_and_Energy_Saving_Evaluation" target="_blank" rel="noopener">Agreement-seeking cooperation, on track</a></p>
+          <p class="pub-blurb">Two consumer vehicles we instrumented with a full cooperative-driving stack negotiate maneuvers over C-V2X: 76% agreement rate and 5% energy saving over status sharing.</p>
+          <p class="pub-venue"><span class="pub-year">2026</span>E. Hyeon, L. Zhan, P. Misra, D. Das, M. Di Russo, J. Han, J. Jeong, D. Karbowski, K. Stutenberg, Preprint</p>
         </li>
 
-        <li class="pub-item">
-          <span class="pub-year">2026</span>
-          <div>
-            <p class="pub-title"><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=6jp9KNcAAAAJ&sortby=pubdate&citation_for_view=6jp9KNcAAAAJ:MXK_kJrjxJIC" target="_blank" rel="noopener">DOFG-DMS: Dynamic Occlusion-Aware Feature Gating for Robust Driver Monitoring Under Partial Facial Visibility</a></p>
-            <p class="pub-venue">M. Saleem, E. Hyeon — IEEE Intelligent Vehicles Symposium (IV), pp. 1799–1804</p>
-          </div>
+        <li class="pub-card">
+          <a class="pub-fig" href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=6jp9KNcAAAAJ&sortby=pubdate&citation_for_view=6jp9KNcAAAAJ:MXK_kJrjxJIC" target="_blank" rel="noopener"><div class="pub-fig-box"><img src="assets/figures/dofg-2026.png" alt="Face detection and landmark localization pipeline: HOG detector with CNN fallback, passing 68 facial landmarks to downstream DMS" loading="lazy"></div></a>
+          <p class="pub-title"><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=6jp9KNcAAAAJ&sortby=pubdate&citation_for_view=6jp9KNcAAAAJ:MXK_kJrjxJIC" target="_blank" rel="noopener">Driver monitoring under occlusion</a></p>
+          <p class="pub-blurb">Dynamic feature gating keeps driver-state estimates reliable when part of the face is hidden from the camera.</p>
+          <p class="pub-venue"><span class="pub-year">2026</span>M. Saleem, E. Hyeon, IEEE Intelligent Vehicles Symposium (IV)</p>
         </li>
 
-        <li class="pub-item">
-          <span class="pub-year">2026</span>
-          <div>
-            <p class="pub-title"><a href="https://www.researchgate.net/publication/403323981_On-Track_Validation_of_Full-Stack_Agreement-Seeking_Cooperative_Driving_Automation_and_Energy_Saving_Evaluation" target="_blank" rel="noopener">On-Track Validation of Full-Stack Agreement-Seeking Cooperative Driving Automation and Energy Saving Evaluation</a></p>
-            <p class="pub-venue">E. Hyeon, L. Zhan, P. Misra, et al., K. Stutenberg — Preprint</p>
-          </div>
+        <li class="pub-card">
+          <a class="pub-fig" href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=6jp9KNcAAAAJ&sortby=pubdate&citation_for_view=6jp9KNcAAAAJ:5nxA0vEk-isC" target="_blank" rel="noopener"><div class="pub-fig-box"><img src="assets/figures/itec-2026.png" alt="Driver monitoring in car-following, intersection, and merging scenarios with scene-aware context: FCW SUPPRESS and FCW ALERT outputs" loading="lazy"></div></a>
+          <p class="pub-title"><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=6jp9KNcAAAAJ&sortby=pubdate&citation_for_view=6jp9KNcAAAAJ:5nxA0vEk-isC" target="_blank" rel="noopener">Driver monitoring with scene awareness</a></p>
+          <p class="pub-blurb">Driver state is read together with the driving scene rather than in isolation, so attention is judged against what the road demands.</p>
+          <p class="pub-venue"><span class="pub-year">2026</span>M. Saleem, S. Li, M. Miralles, E. Hyeon, G. Wu, H. Qiu, M. J. Barth, IEEE ITEC and Electric Ground Vehicle Systems</p>
         </li>
 
-        <li class="pub-item">
-          <span class="pub-year">2025</span>
-          <div>
-            <p class="pub-title"><a href="https://www.researchgate.net/publication/384480568_Validation_of_Energy_Saving_from_Cooperative_Driving_Automation_Via_Vehicle-In-The-Loop_Tests" target="_blank" rel="noopener">Validation of Energy Saving from Cooperative Driving Automation Via Vehicle-In-The-Loop Tests</a></p>
-            <p class="pub-venue">E. Hyeon, M. Di Russo, L. Zhan, D. Karbowski — ASME Letters in Dynamic Systems and Control</p>
-          </div>
+        <li class="pub-card">
+          <a class="pub-fig" href="https://www.researchgate.net/publication/384480568_Validation_of_Energy_Saving_from_Cooperative_Driving_Automation_Via_Vehicle-In-The-Loop_Tests" target="_blank" rel="noopener"><div class="pub-fig-box"><img src="assets/figures/vil-2025.png" alt="Toyota Prius Prime plug-in hybrid on a chassis dynamometer for vehicle-in-the-loop CDA energy testing" loading="lazy"></div></a>
+          <p class="pub-title"><a href="https://www.researchgate.net/publication/384480568_Validation_of_Energy_Saving_from_Cooperative_Driving_Automation_Via_Vehicle-In-The-Loop_Tests" target="_blank" rel="noopener">Energy saving by CDA class, vehicle in the loop</a></p>
+          <p class="pub-blurb">Status-sharing, intent-sharing, and agreement-seeking cooperation compared in car-following tests with a real vehicle in the loop.</p>
+          <p class="pub-venue"><span class="pub-year">2025</span>E. Hyeon, M. Di Russo, L. Zhan, J. Jeong, N. Kim, J. Han, P. Misra, K. Stutenberg, D. Karbowski, ASME Letters in Dynamic Systems and Control</p>
         </li>
 
-        <li class="pub-item">
-          <span class="pub-year">2024</span>
-          <div>
-            <p class="pub-title"><a href="https://www.researchgate.net/publication/380779423_A_Large-Scale_Analysis_to_Optimize_the_Control_and_V2V_Communication_Protocols_for_CDA_Agreement-Seeking_Cooperation" target="_blank" rel="noopener">A Large-Scale Analysis to Optimize the Control and V2V Communication Protocols for CDA Agreement-Seeking Cooperation</a></p>
-            <p class="pub-venue">E. Hyeon, P. Misra, D. Karbowski — IEEE Transactions on Control Systems Technology</p>
-          </div>
+        <li class="pub-card">
+          <a class="pub-fig" href="https://www.researchgate.net/publication/380779423_A_Large-Scale_Analysis_to_Optimize_the_Control_and_V2V_Communication_Protocols_for_CDA_Agreement-Seeking_Cooperation" target="_blank" rel="noopener"><div class="pub-fig-box"><img src="assets/figures/tcst-2024.png" alt="Agreement-seeking cooperation flowchart: CDA initiator proposes a cooperative plan, CDA recipient decides to agree or reject, both vehicles implement the final plan" loading="lazy"></div></a>
+          <p class="pub-title"><a href="https://www.researchgate.net/publication/380779423_A_Large-Scale_Analysis_to_Optimize_the_Control_and_V2V_Communication_Protocols_for_CDA_Agreement-Seeking_Cooperation" target="_blank" rel="noopener">Protocol design for agreement seeking</a></p>
+          <p class="pub-blurb">Large-scale simulation of how communication frequency and control parameters govern whether cooperation forms and what it saves.</p>
+          <p class="pub-venue"><span class="pub-year">2024</span>E. Hyeon, P. Misra, D. Karbowski, IEEE Transactions on Control Systems Technology</p>
         </li>
 
-        <li class="pub-item">
-          <span class="pub-year">2023</span>
-          <div>
-            <p class="pub-title"><a href="https://www.researchgate.net/publication/372695583_Decision-Making_Strategy_Using_Multi-Agent_Reinforcement_Learning_for_Platoon_Formation_in_Agreement-Seeking_Cooperation" target="_blank" rel="noopener">Decision-Making Strategy Using Multi-Agent Reinforcement Learning for Platoon Formation in Agreement-Seeking Cooperation</a></p>
-            <p class="pub-venue">E. Hyeon, D. Karbowski, A. Rousseau — IEEE Intelligent Vehicles (IV) Symposium</p>
-          </div>
+        <li class="pub-card">
+          <a class="pub-fig" href="https://www.researchgate.net/publication/372695583_Decision-Making_Strategy_Using_Multi-Agent_Reinforcement_Learning_for_Platoon_Formation_in_Agreement-Seeking_Cooperation" target="_blank" rel="noopener"><div class="pub-fig-box"><img src="assets/figures/iv-2023.png" alt="Schematic of agreement-seeking cooperation: a proposed driving plan is sent to following CAVs, each of which decides and then runs eco-ACC or eco-platooning" loading="lazy"></div></a>
+          <p class="pub-title"><a href="https://www.researchgate.net/publication/372695583_Decision-Making_Strategy_Using_Multi-Agent_Reinforcement_Learning_for_Platoon_Formation_in_Agreement-Seeking_Cooperation" target="_blank" rel="noopener">Learning when to agree</a></p>
+          <p class="pub-blurb">Multi-agent reinforcement learning decides whether a CAV joins a proposed platoon: agreement rate up 52% and energy down 5.5% against heuristic rules.</p>
+          <p class="pub-venue"><span class="pub-year">2023</span>E. Hyeon, D. Karbowski, A. Rousseau, IEEE Intelligent Vehicles Symposium (IV)</p>
         </li>
 
-        <li class="pub-item">
-          <span class="pub-year">2022</span>
-          <div>
-            <p class="pub-title"><a href="https://www.researchgate.net/publication/365148192_Loss_Function_Design_for_Data-Driven_Predictors_to_Enhance_the_Energy_Efficiency_of_Connected_and_Automated_Vehicles" target="_blank" rel="noopener">Loss Function Design for Data-Driven Predictors to Enhance the Energy Efficiency of Connected and Automated Vehicles</a></p>
-            <p class="pub-venue">E. Hyeon, T. Ersal, Y. Kim, A. G. Stefanopoulou — IEEE Transactions on Intelligent Transportation Systems</p>
-          </div>
+        <li class="pub-card">
+          <a class="pub-fig" href="https://www.researchgate.net/publication/365148192_Loss_Function_Design_for_Data-Driven_Predictors_to_Enhance_the_Energy_Efficiency_of_Connected_and_Automated_Vehicles" target="_blank" rel="noopener"><div class="pub-fig-box"><img src="assets/figures/its-2022.png" alt="Energy consumption increase across many simulated trials versus prediction step, with the fitted loss function weight w(kTs) = f(k, sigma)" loading="lazy"></div></a>
+          <p class="pub-title"><a href="https://www.researchgate.net/publication/365148192_Loss_Function_Design_for_Data-Driven_Predictors_to_Enhance_the_Energy_Efficiency_of_Connected_and_Automated_Vehicles" target="_blank" rel="noopener">Loss functions that serve the controller</a></p>
+          <p class="pub-blurb">Speed predictors trained on the closed-loop energy cost of their errors, not on mean squared error: the weight follows where the controller is sensitive.</p>
+          <p class="pub-venue"><span class="pub-year">2022</span>E. Hyeon, T. Ersal, Y. Kim, A. G. Stefanopoulou, IEEE Transactions on Intelligent Transportation Systems</p>
         </li>
 
-        <li class="pub-item">
-          <span class="pub-year">2021</span>
-          <div>
-            <p class="pub-title"><a href="https://www.researchgate.net/publication/354252735_Data-Driven_Forgetting_and_Discount_Factors_for_Vehicle_Speed_Forecasting_in_Ecological_Adaptive_Cruise_Control" target="_blank" rel="noopener">Data-Driven Forgetting and Discount Factors for Vehicle Speed Forecasting in Ecological Adaptive Cruise Control</a></p>
-            <p class="pub-venue">E. Hyeon, Y. Kim, T. Ersal, A. Stefanopoulou — Journal of Dynamic Systems, Measurement, and Control</p>
-          </div>
+        <li class="pub-card">
+          <a class="pub-fig" href="https://www.researchgate.net/publication/354252735_Data-Driven_Forgetting_and_Discount_Factors_for_Vehicle_Speed_Forecasting_in_Ecological_Adaptive_Cruise_Control" target="_blank" rel="noopener"><div class="pub-fig-box"><img src="assets/figures/jdsmc-2021.png" alt="Real-world driving trajectories used to fit the acceleration correlation for the forgetting factor, from a route across southeast Michigan" loading="lazy"></div></a>
+          <p class="pub-title"><a href="https://www.researchgate.net/publication/354252735_Data-Driven_Forgetting_and_Discount_Factors_for_Vehicle_Speed_Forecasting_in_Ecological_Adaptive_Cruise_Control" target="_blank" rel="noopener">Forgetting and discount factors from data</a></p>
+          <p class="pub-blurb">Weights for speed forecasting chosen from real V2V driving records instead of tuned by hand, so the predictor trusts each preceding vehicle as much as the data warrants.</p>
+          <p class="pub-venue"><span class="pub-year">2021</span>E. Hyeon, Y. Kim, T. Ersal, A. Stefanopoulou, ASME Journal of Dynamic Systems, Measurement, and Control</p>
         </li>
 
-        <li class="pub-item">
-          <span class="pub-year">2020</span>
-          <div>
-            <p class="pub-title"><a href="https://ieeexplore.ieee.org/document/9304447" target="_blank" rel="noopener">Fast Risk-Sensitive Model Predictive Control for Systems with Time-Series Forecasting Uncertainties</a></p>
-            <p class="pub-venue">E. Hyeon, et al. — 59th IEEE Conference on Decision and Control (CDC)</p>
-          </div>
+        <li class="pub-card">
+          <a class="pub-fig" href="https://ieeexplore.ieee.org/document/9304447" target="_blank" rel="noopener"><div class="pub-fig-box"><img style="object-position:center 72%" src="assets/figures/cdc-2020.png" alt="Penalty coefficients vs state covariance for risk-neutral, risk-seeking, and risk-averse controllers" loading="lazy"></div></a>
+          <p class="pub-title"><a href="https://ieeexplore.ieee.org/document/9304447" target="_blank" rel="noopener">Risk-sensitive control under forecast uncertainty</a></p>
+          <p class="pub-blurb">A fast risk-sensitive model predictive control formulation for systems whose forecasts carry time-series uncertainty.</p>
+          <p class="pub-venue"><span class="pub-year">2020</span>E. Hyeon, Y. Kim, T. Ersal, A. Stefanopoulou, IEEE Conference on Decision and Control (CDC)</p>
         </li>
 
       </ul>
