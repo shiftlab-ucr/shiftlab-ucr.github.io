@@ -358,7 +358,7 @@
         <span>PI: <strong><a href="https://profiles.ucr.edu/eunjeong.hyeon" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">Eunjeong Hyeon</a></strong></span>
         <span>University of California, Riverside</span>
       </div>
-      <a class="open-badge" href="#join">Now recruiting PhD students for Fall 2027</a>
+      <a class="open-badge" href="#join">Now recruiting PhD students in control for Fall 2027</a>
     </div>
   </section>
 
@@ -597,28 +597,29 @@
   <section id="join">
     <div class="wrap section-head">
       <p class="section-tag">Join</p>
-      <h2>PhD positions, Fall 2027</h2>
+      <h2>PhD positions in control, Fall 2027</h2>
     </div>
     <div class="wrap content-row">
       <div class="content-spacer"></div>
       <div class="join-body">
-        <p>SHIFT Lab is recruiting PhD students to start in Fall 2027 in the Department of Mechanical Engineering at the University of California, Riverside. Students will develop methods that let autonomous systems quantify how much they can trust their own predictions, sensing, and partners, and act on that information. The work combines theory with validation on hardware-in-the-loop setups, a chassis dynamometer, and full-scale vehicles.</p>
+        <p>SHIFT Lab is recruiting PhD students with a background in control to start in Fall 2027 in the Department of Mechanical Engineering at the University of California, Riverside.</p>
+        <p>Our integrity monitors produce a protection level (PL): a certified bound on the error of a perception or state estimate that holds with a specified integrity risk. A bound is only useful if the decision layer acts on it. These positions address that downstream problem: how a planner and controller should use a time-varying PL to remain safe without becoming overly conservative. Methods are validated in simulation, hardware-in-the-loop, and full-scale vehicle tests.</p>
         <p>Admitted students are supported as graduate student researchers on externally funded projects.</p>
 
         <div class="join-grid">
           <div class="join-block">
-            <h3>Research directions</h3>
+            <h3>Research problems</h3>
             <ul>
-              <li><strong>Integrity verification for AI systems:</strong> runtime monitoring and protection levels for learned perception, built on conformal prediction and RAIM-type integrity concepts.</li>
-              <li><strong>Control and prediction under uncertainty:</strong> decision-aware forecasting and risk-aware model predictive control.</li>
-              <li><strong>Multi-agent coordination under information asymmetry:</strong> agreement-seeking cooperation, game-theoretic and learning-based negotiation, consensus with partial information.</li>
+              <li><strong>PL-aware model predictive control:</strong> treating the PL as a time-varying uncertainty set in robust, tube-based, or chance-constrained MPC, and characterizing the trade-off between integrity risk and performance.</li>
+              <li><strong>Integrity-aware planning and fallback:</strong> mode switching and minimal-risk maneuvers when the PL exceeds the alert limit, with guarantees from reachability analysis or control barrier functions.</li>
+              <li><strong>Learning-based control with integrity guarantees:</strong> safety filters that use the PL to certify learned or RL policies, and closing the loop between conformal prediction and control.</li>
             </ul>
           </div>
           <div class="join-block">
             <h3>Background</h3>
-            <p>A B.S. or M.S. in mechanical, aerospace, electrical, or computer engineering, or a related field.</p>
-            <p>Preparation in at least one of: optimal control or MPC, estimation and probability, machine learning, multi-agent systems.</p>
-            <p>Programming experience in Python, MATLAB/Simulink, or C++. Experience with ROS, CARLA, or vehicle experiments is a plus but not required.</p>
+            <p>A B.S. or M.S. in mechanical, aerospace, or electrical engineering, or a related field.</p>
+            <p>Coursework or research in at least one of: model predictive control, robust control, optimal control, or learning-based control. A working knowledge of linear systems, convex optimization, and probability is expected.</p>
+            <p>Implementation experience in MATLAB/Simulink or Python (e.g., CasADi, acados, CVXPY). Experience with control barrier functions, reachability, reinforcement learning, or vehicle experiments is a plus.</p>
           </div>
           <div class="join-block">
             <h3>How to apply</h3>
@@ -626,7 +627,7 @@
             <ul>
               <li>CV</li>
               <li>Unofficial transcripts</li>
-              <li>A one-page statement naming the research direction above that interests you and the relevant work you have done</li>
+              <li>A one-page statement describing a control problem you have worked on and how you would use an error bound such as the PL in that controller</li>
               <li>Optional: a paper, thesis, or code repository</li>
             </ul>
             <p>Then submit a formal application to the <a href="https://me.ucr.edu/academics/graduateprogram" target="_blank" rel="noopener">UCR Mechanical Engineering PhD program</a> and list Prof. Hyeon as a prospective advisor.</p>
