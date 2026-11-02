@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SHIFT Lab — UC Riverside</title>
+<title>SHIFT Lab | UC Riverside</title>
 <meta name="description" content="SHIFT Lab at UC Riverside: verifiable decision-making under uncertainty, spanning control, multi-agent coordination, and perception integrity, with connected and automated vehicles as the flagship testbed.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -226,6 +226,21 @@
   .pub-more{grid-column:2; margin-top:24px; font-size:15px; color:var(--muted); max-width:62ch;}
   .pub-more a{color:var(--pine); text-decoration:underline; text-underline-offset:3px;}
 
+  /* ---------- Openings ---------- */
+  .open-badge{display:inline-block; font-family:'Space Grotesk',sans-serif; font-size:13px; color:var(--ink); background:var(--amber); padding:6px 12px; border-radius:999px; text-decoration:none; margin-top:24px;}
+  .open-badge:hover, .open-badge:focus-visible{background:var(--paper);}
+  .join-body{max-width:1080px;}
+  .join-body > p{margin:0 0 20px; max-width:78ch;}
+  .join-grid{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:36px; margin-top:36px;}
+  .join-block h3{font-size:15px; font-weight:600; color:var(--pine); margin:0 0 12px; letter-spacing:0.01em;}
+  .join-block p, .join-block li{font-size:15px; line-height:1.6;}
+  .join-block p{margin:0 0 10px;}
+  .join-block ul{margin:0; padding-left:18px;}
+  .join-block li{margin-bottom:8px;}
+  .join-note{margin-top:32px; font-size:15px; color:var(--muted); border-top:1px dashed var(--paper-line); padding-top:20px;}
+  .join-body a{color:var(--pine); text-decoration:underline; text-underline-offset:3px;}
+  @media (max-width:1000px){ .join-grid{grid-template-columns:1fr; gap:28px;} }
+
   /* ---------- Contact ---------- */
   .contact-grid{grid-column:2; display:grid; grid-template-columns:1fr 1fr; gap:48px; max-width:72ch;}
   .contact-block h4{
@@ -314,6 +329,7 @@
       <a href="#research">Research</a>
       <a href="#members">Members</a>
       <a href="#publications">Publications</a>
+      <a href="#join">Join</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -342,6 +358,7 @@
         <span>PI: <strong><a href="https://profiles.ucr.edu/eunjeong.hyeon" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">Eunjeong Hyeon</a></strong></span>
         <span>University of California, Riverside</span>
       </div>
+      <a class="open-badge" href="#join">Now recruiting PhD students for Fall 2027</a>
     </div>
   </section>
 
@@ -496,7 +513,7 @@
       </div>
     </div>
     <div class="wrap">
-      <p class="members-cta">Interested in joining the lab? <a href="#contact">Contact</a>.</p>
+      <p class="members-cta">Interested in joining the lab? See <a href="#join">open positions</a>.</p>
     </div>
   </section>
 
@@ -574,6 +591,50 @@
         </li>
 
       </ul>
+    </div>
+  </section>
+
+  <section id="join">
+    <div class="wrap section-head">
+      <p class="section-tag">Join</p>
+      <h2>PhD positions, Fall 2027</h2>
+    </div>
+    <div class="wrap content-row">
+      <div class="content-spacer"></div>
+      <div class="join-body">
+        <p>SHIFT Lab is recruiting PhD students to start in Fall 2027 in the Department of Mechanical Engineering at the University of California, Riverside. Students will develop methods that let autonomous systems quantify how much they can trust their own predictions, sensing, and partners, and act on that information. The work combines theory with validation on hardware-in-the-loop setups, a chassis dynamometer, and full-scale vehicles.</p>
+        <p>Admitted students are supported as graduate student researchers on externally funded projects.</p>
+
+        <div class="join-grid">
+          <div class="join-block">
+            <h3>Research directions</h3>
+            <ul>
+              <li><strong>Integrity verification for AI systems:</strong> runtime monitoring and protection levels for learned perception, built on conformal prediction and RAIM-type integrity concepts.</li>
+              <li><strong>Control and prediction under uncertainty:</strong> decision-aware forecasting and risk-aware model predictive control.</li>
+              <li><strong>Multi-agent coordination under information asymmetry:</strong> agreement-seeking cooperation, game-theoretic and learning-based negotiation, consensus with partial information.</li>
+            </ul>
+          </div>
+          <div class="join-block">
+            <h3>Background</h3>
+            <p>A B.S. or M.S. in mechanical, aerospace, electrical, or computer engineering, or a related field.</p>
+            <p>Preparation in at least one of: optimal control or MPC, estimation and probability, machine learning, multi-agent systems.</p>
+            <p>Programming experience in Python, MATLAB/Simulink, or C++. Experience with ROS, CARLA, or vehicle experiments is a plus but not required.</p>
+          </div>
+          <div class="join-block">
+            <h3>How to apply</h3>
+            <p>Email <a href="mailto:eunjeong.hyeon@ucr.edu?subject=%5BPhD%20Application%5D%20Fall%202027">eunjeong.hyeon@ucr.edu</a> with the subject line <strong>[PhD Application] Fall 2027, Your Name</strong> and attach:</p>
+            <ul>
+              <li>CV</li>
+              <li>Unofficial transcripts</li>
+              <li>A one-page statement naming the research direction above that interests you and the relevant work you have done</li>
+              <li>Optional: a paper, thesis, or code repository</li>
+            </ul>
+            <p>Then submit a formal application to the <a href="https://me.ucr.edu/academics/graduateprogram" target="_blank" rel="noopener">UCR Mechanical Engineering PhD program</a> and list Prof. Hyeon as a prospective advisor.</p>
+          </div>
+        </div>
+
+        <p class="join-note">Inquiries are reviewed on a rolling basis. Due to volume, only candidates whose background matches current projects will receive a reply. Undergraduate and visiting researchers at UCR may also inquire.</p>
+      </div>
     </div>
   </section>
 
