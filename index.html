@@ -314,15 +314,15 @@
   .open-badge{color:#0F172A !important;}
   .hero p.lede{color:var(--muted-on-ink);}
 
-  .hero{padding:104px 0 96px;}
-  .hero-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; filter:saturate(0.55) contrast(1.05);}
+  .hero{padding:140px 0 132px;}
+  .hero-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; filter:saturate(0.8);}
   .hero-shade{position:absolute; inset:0; z-index:1;
-    background:linear-gradient(90deg, rgba(11,18,32,0.94) 0%, rgba(11,18,32,0.82) 42%, rgba(11,18,32,0.5) 100%);}
+    background:linear-gradient(90deg, rgba(11,18,32,0.9) 0%, rgba(11,18,32,0.7) 38%, rgba(11,18,32,0.15) 75%, rgba(11,18,32,0.1) 100%);}
   .hero-split{display:grid; grid-template-columns:1.05fr 1fr; gap:48px; align-items:center;}
   .hero-viz{width:100%; height:auto;}
   @media (max-width:820px){
     .hero-split{grid-template-columns:1fr;} .hero-viz{max-width:420px;}
-    .hero-shade{background:rgba(11,18,32,0.8);}
+    .hero-shade{background:rgba(11,18,32,0.72);}
   }
   @media (prefers-reduced-motion: reduce){ .hero-video{display:none;} .hero{background:var(--blue) url('assets/video/hero-poster.jpg') center/cover;} }
 </style>
@@ -353,7 +353,7 @@
       <source src="assets/video/hero.mp4" type="video/mp4">
     </video>
     <div class="hero-shade" aria-hidden="true"></div>
-    <div class="wrap hero-split">
+    <div class="wrap">
       <div>
       <h1>Principled trust in autonomy.</h1>
       <p class="lede">A system earns trust not by acting confidently, but by knowing when it should not.</p>
@@ -363,30 +363,6 @@
       </div>
       <a class="open-badge" href="#join">Now recruiting PhD students in control</a>
       </div>
-      <svg class="hero-viz" viewBox="0 0 520 380" role="img" aria-label="A tracked object moves along a trajectory; its protection level grows and shrinks and triggers an alert when it exceeds the alert limit">
-        <defs>
-          <radialGradient id="plFill" r="0.5"><stop offset="0" stop-color="#5EEAD4" stop-opacity="0.35"/><stop offset="1" stop-color="#5EEAD4" stop-opacity="0.05"/></radialGradient>
-          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        </defs>
-        <path id="trk" d="M20 330 C 140 310, 180 190, 280 180 S 440 130, 500 50" fill="none" stroke="rgba(203,213,225,0.25)" stroke-width="2"/>
-        <path d="M20 330 C 140 310, 180 190, 280 180 S 440 130, 500 50" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-dasharray="6 10" opacity="0.7"><animate attributeName="stroke-dashoffset" from="0" to="-160" dur="6s" repeatCount="indefinite"/></path>
-        <g>
-          <circle r="58" fill="none" stroke="#E2E8F0" stroke-width="1.2" stroke-dasharray="5 5" opacity="0.8"/>
-          <circle r="28" fill="url(#plFill)" stroke="#5EEAD4" stroke-width="2" filter="url(#glow)">
-            <animate attributeName="r" dur="10s" repeatCount="indefinite" values="24;40;30;46;68;34;24" keyTimes="0;0.2;0.35;0.55;0.7;0.85;1"/>
-            <animate attributeName="stroke" dur="10s" repeatCount="indefinite" calcMode="discrete" values="#5EEAD4;#FBBF24;#5EEAD4" keyTimes="0;0.64;0.78"/>
-          </circle>
-          <circle r="5" fill="#F8FAFC"/>
-          <text x="0" y="-80" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="600" letter-spacing="0.08em" fill="#FBBF24" opacity="0">INTEGRITY ALERT
-            <animate attributeName="opacity" dur="10s" repeatCount="indefinite" calcMode="discrete" values="0;1;0" keyTimes="0;0.64;0.78"/>
-          </text>
-          <animateMotion dur="10s" repeatCount="indefinite"><mpath href="#trk"/></animateMotion>
-        </g>
-        <g font-family="Inter,sans-serif" font-size="12" fill="#CBD5E1">
-          <line x1="24" y1="30" x2="44" y2="30" stroke="#E2E8F0" stroke-dasharray="4 4"/><text x="52" y="34">Alert limit (AL)</text>
-          <circle cx="34" cy="54" r="7" fill="url(#plFill)" stroke="#5EEAD4"/><text x="52" y="58">Protection level (PL)</text>
-        </g>
-      </svg>
     </div>
   </section>
 
